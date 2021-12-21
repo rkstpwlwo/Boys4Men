@@ -1,0 +1,35 @@
+#nav {
+  display: flex;
+  /* border: 5px solid black; */
+  width: 100%;
+  justify-content: center;
+}
+.nav_Home {
+  border: 5px solid darkgray;
+}
+.nav_element {
+  color: white;
+  font-family: cursive;
+  padding-top: 30px;
+  font-weight: bold;
+  background-color: #174771;
+  /* background-color: ; */
+
+  text-align: center;
+  width: 400px;
+  height: 50px;
+  /* text-decoration: none; */
+}
+.nav_element:hover {
+  background-color: #e6b987;
+}
+
+#Footer {
+  position: fixed;
+  font-weight: bold;
+  /* border-top: solid 3px #5448cd; */
+  color: #ecda9d;
+  text-align: center;
+  bottom: 0px;
+  width: 100%;
+}
