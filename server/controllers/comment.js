@@ -1,10 +1,13 @@
 const models = require('../models');
 
 module.exports = {
+    comment: {
+        get: (req, res) => {
 
-  comment: {
+        },
 
-   
+        post: (req, res) => {
 
-  }
+        },
+    }
 };

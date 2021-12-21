@@ -68,6 +68,38 @@ module.exports = {
     }
   },
   post:{
+    get:(category,callback)=>{
+      const queryString=`select userId,userMbti,title,contents from post where category=mbti`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      });
+      endConnection(connection);
+    },
+    post:(userId, userMbti,title,contents,callback)=>{
+      const queryString=`insert into post (userId, userMbti,title,contents) values(?,?,?,?)`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    },
+    put:(postId,title,contents,callback)=>{
+      const queryString=`update post set title,contents where post.id=postId`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    },
+    delete:(postId,callback)=>{
+      const queryString=`delete from post where post.id=postId`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    }
 
   },
   genre:{
