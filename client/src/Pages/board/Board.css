@@ -1,0 +1,84 @@
+#Board {
+  text-align: center;
+  padding-top: 60px;
+}
+#boardtitle {
+  font-size: 30px;
+  color: #18a2e7;
+}
+.Post {
+  display: flex;
+  padding: 40px;
+  background-color: #1e548b;
+  color: white;
+  font-weight: bold;
+  border-bottom: 2px solid white;
+}
+
+.Post > #title {
+  flex: 4 1 auto;
+}
+.post > #MBTI {
+  flex: 1 1 auto;
+}
+.Post > #writer {
+  flex: 1 1 auto;
+}
+.post > #date {
+  flex: 2 1 auto;
+}
+.Posts {
+  display: flex;
+  padding: 20px;
+  padding-left: 43px;
+  background-color: #8abde9;
+  color: white;
+  font-weight: bold;
+  border-bottom: 2px solid #3480fb;
+}
+
+.Posts > #title {
+  flex: 4 1 auto;
+}
+.posts > #MBTI {
+  flex: 1 1 auto;
+}
+.Posts > #writer {
+  flex: 1 1 auto;
+}
+.posts > #date {
+  flex: 2 1 auto;
+}
+
+#Posting {
+  padding: 20px;
+  background-color: #7fb7ef;
+  border: 2px solid white;
+  position: absolute;
+  text-align: center;
+  bottom: 0px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+#Posting:hover {
+  background-color: #ebccb8;
+}
+
+#Writing {
+  border: 3px solid black;
+  padding: 20px;
+  position: absolute;
+  left: 400px;
+  top: 200px;
+  text-align: center;
+}
+#WritingTitle {
+  width: 700px;
+}
+#WritingContent {
+  width: 700px;
+  height: 1000px;
+}
