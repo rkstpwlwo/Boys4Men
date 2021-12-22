@@ -1,10 +1,6 @@
 const router = require('express').Router();
-const controller = require('../controllers');
+const genreController = require('../controllers/genre');
 
-
-router.get('/genre', controller.genre.get);
-router.get('/genre/mbti/:mbti', controller.genre.mbti.get);
-router.get('/genre/:genre', controller.genre.get);
-
+router.get('/genre', genreController.genre.get);
 
 module.exports = router;

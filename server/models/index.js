@@ -67,13 +67,90 @@ module.exports = {
       endConnection(connection);
     }
   },
+
   post:{
-
-  },
-  genre:{
-
+    get:(category,callback)=>{
+      const queryString=`select userId,userMbti,title,contents from Post where userMbti=category`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      });
+      endConnection(connection);
+    },
+    post:(userId, userMbti,title,contents,callback)=>{
+      const queryString=`insert into Post (userId, userMbti,title,contents) values(?,?,?,?)`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    },
+    put:(postId,title,contents,callback)=>{
+      const queryString=`update Post set Post.title=title,Post.contents=contents where Post.id=postId`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    },
+    delete:(postId,callback)=>{
+      const queryString=`delete from Post where post.id=postId`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    }
   },
   comment:{
+    get:(userId, content, created_at, callback)=>{
+      const queryString=`select userId,content,created_at from Comment where comment.userId=userId`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      });
+      endConnection(connection);
+    },
+    post:(userId, content, postId, callback)=>{
+      const queryString=`insert into Comment (userId,content, postId) values(?,?,?)`;
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    },
+  },
+  genre:{
+    get:(name, img, description, mbti, callback)=>{
+      if(mbti) {
+        const queryString=`
+         select Genre.img, Genre.description, Song.name, Song.artist  from Genre
+         inner join Genre_Mbti on Genre.id=Genre_Mbti.genreId
+         inner join Song on Genre.id=Song.genreId
+         where Genre_Mbti.mbti=mbti;
+        `;
 
+        const connection=createConnection();
+        connection.query(queryString,function(err,result){
+          callback(err,result);
+        });
+        endConnection(connection);
+      }
+      else {
+        const queryString=`
+         select Genre.img, Genre.description, Song.name, Song.artist  from Genre
+         inner join Song on Genre.id=Song.genreId;
+        `;
+
+        const connection=createConnection();
+        connection.query(queryString,function(err,result){
+          callback(err,result);
+        });
+        endConnection(connection);
+      }
+
+    },
   }
+
+
 };

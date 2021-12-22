@@ -9,13 +9,16 @@ module.exports={
     mbti:require('./user/mbti'),
     del:require('./user/del')
   },
+
   postController:{
-
+    post:require('./post')
   },
+
   commentController:{
-
+    comment:require('./comment')
   },
+
   genreController:{
-    
+    genre:require('./genre')
   }
 }
