@@ -10,15 +10,15 @@ module.exports={
     del:require('./user/del')
   },
 
-  // postController:{
-  //   post:require('./post')
-  // },
-  //
-  // commentController:{
-  //   comment:require('./comment')
-  // },
-  //
-  // genreController:{
-  //   genre:require('./genre')
-  // }
+  postController:{
+    post:require('./post')
+  },
+
+  commentController:{
+    comment:require('./comment')
+  },
+
+  genreController:{
+    genre:require('./genre')
+  }
 }
