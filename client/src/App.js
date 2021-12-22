@@ -4,14 +4,18 @@ import "./App.css";
 import Nav from "./Components/Navigation";
 import Footer from "./Components/Footer";
 import Login from "./Pages/Login";
-import Mbti from "./Pages/Mbti";
+// import Mbti from "./Pages/Mbti";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Mypage from "./Pages/Mypage";
 import Signup from "./Pages/Signup";
 import Board from "./Pages/board/Board";
-import SurveyLink from "./Pages/SurveyLink";
+// import SurveyLink from "./Pages/SurveyLink";
 import Writing from "./Pages/board/Writing";
 import axios from "axios";
+import MbtiRouter from "./Pages/MbtiPage/MbtiPage";
+
+
+
 function App() {
   const [isLogin, setLogin] = useState(false);
   // const [userInfo, setuserInfo] = useState(null);
@@ -63,12 +67,13 @@ function App() {
         <div>
           <Nav isLogin={isLogin} LogoutHandler={LogoutHandler} />
           {/* mbti 탭 */}
+
         </div>
         <div>
           <Switch>
             <div>
               <Route exact path="/">
-                <Mbti />
+              <MbtiRouter/>
               </Route>
               <Route path="/board">
                 <Board accessToken={accessToken} isLogin={isLogin} />
@@ -86,7 +91,7 @@ function App() {
                 <Writing />
               </Route>
               <Route path="/SurveyLink">
-                <SurveyLink />
+                {/* <SurveyLink /> */}
               </Route>
             </div>
           </Switch>
