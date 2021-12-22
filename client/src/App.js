@@ -4,13 +4,16 @@ import "./App.css";
 import Nav from "./Components/Navigation";
 import Footer from "./Components/Footer";
 import Login from "./Pages/Login";
-import Mbti from "./Pages/Mbti";
+// import Mbti from "./Pages/Mbti";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Mypage from "./Pages/Mypage";
 import Signup from "./Pages/Signup";
 import Board from "./Pages/board/Board";
-import SurveyLink from "./Pages/SurveyLink";
+// import SurveyLink from "./Pages/SurveyLink";
 import Writing from "./Pages/board/Writing";
+import axios from "axios";
+import MbtiRouter from "./Pages/MbtiPage/MbtiPage";
+
 function App() {
   const [isLogin, setLogin] = useState(false);
   // const [userInfo, setuserInfo] = useState(null);
@@ -27,12 +30,14 @@ function App() {
 
   // 로그아웃요청 API
   function LogoutHandler() {
-    // axios
-    //   .post(url, { headers: { Authorization: `Bearer ${accessToken}` } })
-    //   .then((result) => {
-    //     setLogin(false);
-    //     accessToken(null);
-    //   });
+    axios
+      .post("url/user/logout", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((result) => {
+        setLogin(false);
+        accessToken(null);
+      });
   }
 
   const region = [
@@ -54,6 +59,14 @@ function App() {
     "부산",
     "제주도",
   ];
+
+  const [post, setpost] = useState(null);
+  // 특정 게시물의 내용을 조회하는 API
+  function ReadBoard() {
+    // axios.get("url/post/:postid",{headers : {Authorization : `Bearer ${accessToken}`}}).then((result) => {
+    //   setpost({id  ,writer , mbti,title,content,sameUser })
+    // })
+  }
   return (
     <div>
       <BrowserRouter>
@@ -65,8 +78,7 @@ function App() {
           <Switch>
             <div>
               <Route exact path="/">
-                <Mbti />
-                <SurveyLink />
+                <MbtiRouter />
               </Route>
               <Route path="/board">
                 <Board accessToken={accessToken} isLogin={isLogin} />
@@ -83,6 +95,7 @@ function App() {
               <Route path="/Writing">
                 <Writing />
               </Route>
+              <Route path="/SurveyLink">{/* <SurveyLink /> */}</Route>
             </div>
           </Switch>
           <Footer />

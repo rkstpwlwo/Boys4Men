@@ -3,25 +3,29 @@
   /* border: 5px solid black; */
   width: 100%;
   justify-content: center;
+  background-color: #174771;
 }
-.nav_Home {
-  border: 5px solid darkgray;
-}
+
 .nav_element {
   color: white;
+  flex: 1 1 auto;
   font-family: cursive;
   padding-top: 30px;
   font-weight: bold;
-  background-color: #174771;
+
   /* background-color: ; */
 
   text-align: center;
-  width: 400px;
+  width: 350px;
   height: 50px;
   /* text-decoration: none; */
 }
 .nav_element:hover {
-  background-color: #e6b987;
+  background-color: white;
+  color: #174771;
+}
+.nav_element:active {
+  background-color: #b1edf7;
 }
 
 #Footer {

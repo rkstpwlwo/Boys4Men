@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 function Login({ LoginHandler }) {
   const [userId, setUserId] = useState({ userId: "" });
@@ -16,22 +17,22 @@ function Login({ LoginHandler }) {
 
   // 로그인을 요청하는 API
   function loginRequestHandler() {
-    // axios
-    //   .post(
-    //     url,
-    //     { userId: userId.userId, password: password.password },
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //       withCredentials: true,
-    //     }
-    //   )
-    //   .then((result) => {
-    //     // 로그인 성공시
-    //     LoginHandler(result.data.data.accessToken);
-    //     // result.data.data.mbti 값이 null인 유저와 null 이 아닌 유저를 구분해서 페이지를 렌더링
-    //     // 로그인 실패시
-    //     // 유효하지 않은 id나 password라는 alert를 띄움
-    //   });
+    axios
+      .post(
+        "url/user/login",
+        { id: userId.userId, password: password.password },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      )
+      .then((result) => {
+        // 로그인 성공시
+        LoginHandler(result.data.data.accessToken);
+        // result.data.data.mbti 값이 null인 유저와 null 이 아닌 유저를 구분해서 페이지를 렌더링
+        // 로그인 실패시
+        // 유효하지 않은 id나 password라는 alert를 띄움
+      });
   }
 
   return (
@@ -39,6 +40,7 @@ function Login({ LoginHandler }) {
       <div id="login">
         <br />
         <br />
+        <div id="LoginTitle">Login</div>
         <div>아이디</div>
         <input
           name="userId"
@@ -78,8 +80,6 @@ function Login({ LoginHandler }) {
           >
             로그인
           </button>
-          <br />
-          <br />
 
           <Link to="Signup">
             <button
