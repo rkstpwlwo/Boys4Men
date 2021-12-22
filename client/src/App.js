@@ -9,10 +9,43 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Mypage from "./Pages/Mypage";
 import Signup from "./Pages/Signup";
 import Board from "./Pages/board/Board";
-// import SurveyLink from "./Pages/SurveyLink";
 import Writing from "./Pages/board/Writing";
 import axios from "axios";
-import MbtiRouter from "./Pages/MbtiPage/MbtiPage";
+import MbtiPage from "./Pages/MbtiPage/MbtiPage";
+import MBTISearch from "./Pages/MBTIsearch/Mbtisearch";
+import MBTISurveyResult from "./Pages/MBTIsearch/MbtiSurveyResult";
+import {
+  ISTJComponent,
+  ISTPComponent,
+  ISFJComponent,
+  ISFPComponent,
+  INTJComponent,
+  INTPComponent,
+  INFJComponent,
+  INFPComponent,
+  ESTJComponent,
+  ESTPComponent,
+  ESFJComponent,
+  ESFPComponent,
+  ENTJComponent,
+  ENTPComponent,
+  ENFJComponent,
+  ENFPComponent,
+} from "./Pages/MbtiPage/Mbtiexplain";
+import Genre from "./Pages/GenrePage/GenrePage";
+import {
+  PunkComponent,
+  JazzComponent,
+  AlternativeRockComponent,
+  NewAgeComponent,
+  PopComponent,
+  MetalComponent,
+  HiphopComponent,
+  ElectronicaComponent,
+  BluesComponent,
+  RandBComponent,
+  ReggaeComponent,
+} from "./Pages/GenrePage/GenreExplain";
 
 function App() {
   const [isLogin, setLogin] = useState(false);
@@ -72,13 +105,13 @@ function App() {
       <BrowserRouter>
         <div>
           <Nav isLogin={isLogin} LogoutHandler={LogoutHandler} />
-          {/* mbti 탭 */}
         </div>
         <div>
           <Switch>
             <div>
               <Route exact path="/">
-                <MbtiRouter />
+                <MbtiPage />
+                <Genre />
               </Route>
               <Route path="/board">
                 <Board accessToken={accessToken} isLogin={isLogin} />
@@ -95,7 +128,94 @@ function App() {
               <Route path="/Writing">
                 <Writing />
               </Route>
-              <Route path="/SurveyLink">{/* <SurveyLink /> */}</Route>
+              <Route path="/MBTIsearch">
+                <MBTISearch />
+              </Route>
+              <Route path="/MBTISurveyResult">
+                <MBTISurveyResult />
+              </Route>
+              <Route path="/mbti/istj">
+                <ISTJComponent />
+              </Route>
+              <Route path="/mbti/istp">
+                <ISTPComponent />
+              </Route>
+              <Route path="/mbti/isfj">
+                <ISFJComponent />
+              </Route>
+              <Route path="/mbti/isfp">
+                <ISFPComponent />
+              </Route>
+              <Route exact path="/mbti/intj">
+                <INTJComponent />
+              </Route>
+              <Route path="/mbti/intp">
+                <INTPComponent />
+              </Route>
+              <Route path="/mbti/infj">
+                <INFJComponent />
+              </Route>
+              <Route path="/mbti/infp">
+                <INFPComponent />
+              </Route>
+              <Route exact path="/mbti/estj">
+                <ESTJComponent />
+              </Route>
+              <Route path="/mbti/estp">
+                <ESTPComponent />
+              </Route>
+              <Route path="/mbti/esfj">
+                <ESFJComponent />
+              </Route>
+              <Route path="/mbti/esfp">
+                <ESFPComponent />
+              </Route>
+              <Route exact path="/mbti/entj">
+                <ENTJComponent />
+              </Route>
+              <Route path="/mbti/entp">
+                <ENTPComponent />
+              </Route>
+              <Route path="/mbti/enfj">
+                <ENFJComponent />
+              </Route>
+              <Route path="/mbti/enfp">
+                <ENFPComponent />
+              </Route>
+
+              <Route exact path="/genre/Punk">
+                <PunkComponent />
+              </Route>
+              <Route path="/genre/Jazz">
+                <JazzComponent />
+              </Route>
+              <Route path="/genre/AlternativeRock">
+                <AlternativeRockComponent />
+              </Route>
+              <Route path="/genre/NewAge">
+                <NewAgeComponent />
+              </Route>
+              <Route path="/genre/Pop">
+                <PopComponent />
+              </Route>
+              <Route path="/genre/Metal">
+                <MetalComponent />
+              </Route>
+              <Route path="/genre/Hiphop">
+                <HiphopComponent />
+              </Route>
+              <Route path="/genre/Electronica">
+                <ElectronicaComponent />
+              </Route>
+              <Route path="/genre/Blues">
+                <BluesComponent />
+              </Route>
+              <Route path="/genre/RandB">
+                <RandBComponent />
+              </Route>
+              <Route path="/genre/Reggae">
+                <ReggaeComponent />
+              </Route>
             </div>
           </Switch>
           <Footer />

@@ -9,7 +9,7 @@ function Nav({ isLogin, LogoutHandler }) {
     <div>
       <div id="nav">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <div className="nav_element" style={{ fontSize: "23px" }}>
+          <div className="nav_element" style={{ fontSize: "50px" }}>
             M-Music
           </div>
         </Link>

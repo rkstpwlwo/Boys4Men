@@ -1,0 +1,80 @@
+#MBTISurveyResult {
+  margin: 10px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+  /* white-space: normal; */
+}
+img[id="image"] {
+  width: 395px;
+  height: 330px;
+}
+div[id="imageTag"] {
+  width: 395px;
+  height: 320px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: left;
+}
+#explain {
+  width: 1220px;
+  margin-top: 10px;
+  margin-right: 10px;
+  /* margin-bottom: 6px; */
+  margin-left: 22px;
+  /* left: 20px; */
+  display: inline-flex;
+  border: 5px solid black;
+  max-width: 80%;
+  height: 320px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  white-space: normal;
+  text-overflow: ellipsis;
+  /* white-space: nowrap; */
+  white-space: normal;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  text-align: center;
+}
+
+#explain :first-child {
+  display: flexbox;
+}
+
+#explain :seconed-child {
+  display: flexbox;
+}
+
+#RecommenedGenre {
+  /* max-width: 1210px; */
+  max-width: 100%;
+  min-height: 260px;
+  height: 100%;
+  display: inline-flex;
+  margin-top: 20px;
+}
+.GenreRecommenedSong {
+  display: inline-block;
+  margin-right: 12px;
+  width: 400px;
+  max-width: 100%;
+  height: 310px;
+  border: 5px solid black;
+  /* text-align: center; */
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 10px;
+  word-break: break-all;
+}
+
+#RecommenedGenre :seconed-child {
+  /* word-break: break-all; */
+}
+
+#RecommenedGenre :third-child {
+  /* word-break: break-all; */
+}
+
+#RecommenedGenre :last-child {
+  word-break: break-all;
+}

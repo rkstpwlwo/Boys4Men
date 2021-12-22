@@ -1,0 +1,20 @@
+div[id="ISTJComponent"],
+div[id="ISTPComponent"],
+div[id="ISFJComponent"],
+div[id="ISFPComponent"],
+div[id="INTJComponent"],
+div[id="INTPComponent"],
+div[id="INFJComponent"],
+div[id="INFPComponent"],
+div[id="ESTJComponent"],
+div[id="ESTPComponent"],
+div[id="ESFJComponent"],
+div[id="ESFPComponent"],
+div[id="ENTJComponent"],
+div[id="ENTPComponent"],
+div[id="ENFJComponent"],
+div[id="ENFPComponent"] {
+  color: black;
+  font-size: 16px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+}

@@ -207,8 +207,12 @@
   border-radius: 20px;
 }
 #SurveyLink {
-  padding: 70px;
+  position: fixed;
+  left: 20px;
+  top: 150px;
+  padding: 20px;
   font-size: 30px;
+  color: white;
   cursor: pointer;
   background-color: #c4dcee;
   border-radius: 50px;

@@ -1,0 +1,15 @@
+div[id="PunkComponent"],
+div[id="JazzComponent"],
+div[id="AlternativeRockComponent"],
+div[id="NewAgeComponent"],
+div[id="PopComponent"],
+div[id="MetalComponent"],
+div[id="HiphopComponent"],
+div[id="ElectronicaComponent"],
+div[id="BluesComponent"],
+div[id="RandBComponent"],
+div[id="ReggaeComponent"] {
+  color: black;
+  font-size: 16px;
+  font-family: "IBM Plex Sans KR", sans-serif;
+}

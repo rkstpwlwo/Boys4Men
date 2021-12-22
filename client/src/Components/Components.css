@@ -9,7 +9,8 @@
 .nav_element {
   color: white;
   flex: 1 1 auto;
-  font-family: cursive;
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 35px;
   padding-top: 30px;
   font-weight: bold;
 
