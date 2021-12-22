@@ -17,7 +17,7 @@ module.exports=(req,res)=>{
           id:result[0].userId,
           name:result[0].name,
         }
-        res.status(201).send({
+        res.status(200).send({
           message:'login success',
           accessToken:signToken(tokenInfo),
           mbti:result[0].mbti

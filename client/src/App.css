@@ -179,6 +179,7 @@
   left: 630px;
   background-color: #708da2;
   color: whitesmoke;
+  z-index:100;
 }
 .checkpassword > input {
   padding: 15px;

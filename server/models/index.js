@@ -3,7 +3,7 @@ const {createConnection,endConnection}=require('./createConnection');
 module.exports = {
   user:{
     check:(keyword,searchKey,callback)=>{
-      const queryString=`select id from User where ${keyword}=?`;
+      const queryString=`select id,password from User where ${keyword}=?`;
       const connection=createConnection();
       connection.query(queryString,[searchKey],function(err,result){
         callback(err,result);
