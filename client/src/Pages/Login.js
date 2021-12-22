@@ -48,7 +48,9 @@ function Login({ LoginHandler,url }) {
       }).then((res)=>{
         if(res.status===200){
           LoginHandler(res.data.accessToken);
-
+          if(res.data.mbti===null){
+            history.push()
+          }
         }
       })
     }

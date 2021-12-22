@@ -126,6 +126,7 @@ function Mypage({ accessToken, region }) {
               // 비밀번호가 맞는지 확인
               // 실패하면 비밀번호가 틀렸다고 띄움
               // deleteUserInfo()
+              // 회원 탈퇴 완료시 홈화면으로 렌더링
             }}
           >
             확인
@@ -192,7 +193,8 @@ function Mypage({ accessToken, region }) {
               ) {
                 return alert("변경할 비밀번호 다시 확인해주세요");
               }
-              // 비밀번호 변경을 성공하면 비밀번호를 변경했습니다 alert창
+              // putPassword()
+              // 비밀번호 변경을 성공하면 비밀번호를 변경했습니다 alert창과 함깨 모달 창이 닫힘(setopenPassword(false))
             }}
           >
             확인
@@ -278,6 +280,7 @@ function Mypage({ accessToken, region }) {
                   return alert("지역을 선택해주세요");
                 }
                 // 현재 비밀번호를 확인하고 axios.update
+                // 모달창 닫음(setopenUserInfo(false))
               }}
             >
               확인

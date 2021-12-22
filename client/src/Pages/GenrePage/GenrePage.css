@@ -1,0 +1,76 @@
+body {
+  margin: 0px;
+  list-style: none;
+
+  /* display: none; */
+}
+ul {
+  list-style: none;
+  padding: 0px;
+  overflow-x: auto;
+}
+#Punkimg,
+#Jazzimg,
+#AlternativeRockimg,
+#NewAgeimg,
+#Popimg,
+#Hiphopimg,
+#Metalimg,
+#Electronicaimg,
+#Bluesimg,
+#RandBimg,
+#Reggaeimg {
+  width: 200px;
+  height: 190px;
+}
+#Punkdiv {
+  width: 200px;
+  /* margin-left: 0px; */
+  padding: 0px;
+  border: 0px;
+  /* margin-right: 100px; */
+  /* margin: auto; */
+  /* padding: 0; */
+  /* list-style: none; */
+  /* display: inline; */
+}
+#Punk,
+#Jazz,
+#NewAge,
+#Pop,
+#Metal,
+#Hiphop,
+#Electornica,
+#Blues,
+#RandB,
+#Reggae {
+  /* display: flex; */
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 30px;
+  color: black;
+  /* position: absolute; */
+  /* text-align: center; */
+  /* margin: auto;
+    padding: 0; */
+  /* list-style: none; */
+}
+#AlternativeRock {
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 22px;
+  color: black;
+}
+#genreul {
+  display: flex;
+  margin: 0px;
+  align-items: flex-start;
+
+  /* text-align: left; */
+}
+ul[id="genrecompoent"] li {
+  border: 0px;
+  display: flex;
+}
+Genre a {
+  text-decoration-line: none;
+  width: 100%;
+}
