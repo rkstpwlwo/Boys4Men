@@ -125,8 +125,7 @@ function Mypage({ accessToken, region }) {
             onClick={() => {
               // 비밀번호가 맞는지 확인
               // 실패하면 비밀번호가 틀렸다고 띄움
-              // axios.delete(url,{headers : {Authoriation : `Bearer ${accessToken}`}})
-              // 성공하면 홈화면으로 렌더링 (로그아웃된 상태로)
+              // deleteUserInfo()
             }}
           >
             확인
@@ -282,6 +281,7 @@ function Mypage({ accessToken, region }) {
               }}
             >
               확인
+              {/* onClick={() => {}} */}
             </button>
           </div>
         ) : (

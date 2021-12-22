@@ -92,6 +92,8 @@ function Signup({ region,url,history }) {
           maxLength="12"
           onChange={inputuserId}
         ></input>
+        <button>중복 확인</button>
+        {/* onClick={() => {idCheck()}} */}
         <br />
         <br />
         <span>닉네임</span>
@@ -101,6 +103,8 @@ function Signup({ region,url,history }) {
           maxLength="12"
           onChange={inputUsername}
         ></input>
+        <button>중복 확인</button>
+        {/* onClick={() => {nameCheck()}} */}
         <br />
         <br />
         <span>비밀번호</span>
@@ -169,10 +173,13 @@ function Signup({ region,url,history }) {
               if (password.password !== checkpassword.checkpassword) {
                 return alert("비밀번호를 다시 확인해주세요"); // 비밀번호 확인
               } else {
-                signup();
+                // signup()함수 실행
+                // window.location.assign("localhost:3000/Login");
                 // window.location.assign(window.location.origin+'/Login');
               }
               // 유효성 검사 끝나면 회원가입 완료와 함께 axios.post로 서버에 유저정보를 보냄(signup 함수)
+              // 로그인페이지로 렌더링
+              // <Link to="">
             }}
           >
             회원가입

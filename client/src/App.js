@@ -14,8 +14,6 @@ import Writing from "./Pages/board/Writing";
 import axios from "axios";
 import MbtiRouter from "./Pages/MbtiPage/MbtiPage";
 
-
-
 function App() {
   const [isLogin, setLogin] = useState(false);
   // const [userInfo, setuserInfo] = useState(null);
@@ -62,19 +60,26 @@ function App() {
     "부산",
     "제주도",
   ];
+
+  const [post, setpost] = useState(null);
+  // 특정 게시물의 내용을 조회하는 API
+  function ReadBoard() {
+    // axios.get("url/post/:postid",{headers : {Authorization : `Bearer ${accessToken}`}}).then((result) => {
+    //   setpost({id  ,writer , mbti,title,content,sameUser })
+    // })
+  }
   return (
     <div>
       <BrowserRouter>
         <div>
           <Nav isLogin={isLogin} LogoutHandler={LogoutHandler} />
           {/* mbti 탭 */}
-
         </div>
         <div>
           <Switch>
             <div>
               <Route exact path="/">
-              <MbtiRouter/>
+                <MbtiRouter />
               </Route>
               <Route path="/board">
                 <Board accessToken={accessToken} isLogin={isLogin} />
@@ -91,9 +96,7 @@ function App() {
               <Route path="/Writing">
                 <Writing />
               </Route>
-              <Route path="/SurveyLink">
-                {/* <SurveyLink /> */}
-              </Route>
+              <Route path="/SurveyLink">{/* <SurveyLink /> */}</Route>
             </div>
           </Switch>
           <Footer />

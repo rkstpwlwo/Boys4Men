@@ -8,13 +8,17 @@ function Board({ accessToken, isLogin }) {
   const [posts, setposts] = useState(null);
   function MbtiPost(accessToken) {
     axios
-      .get("url", { headers: { Authorization: `Bearer ${accessToken}` } })
+      .get("url/post?/category=카테고리이름", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
       .then((result) => {});
   }
 
   // 특정 게시물의 내용을 조회하는 API (글을 클릭했을 때 내용이 나옴)
   function Content(accessToken) {
-    axios.get("url", { headers: { Authorization: `Bearer ${accessToken}` } });
+    axios.get("url/post/:postId", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
   }
 
   const mbti = [
@@ -57,8 +61,10 @@ function Board({ accessToken, isLogin }) {
       <div className="Posts">
         <div id="writer">Kim</div>
         <div id="MBTI">ENFP</div>
+        {/* <Link to="/Writing"> */}
         <div id="title">야호 첫글</div>
         {/* onClick 이벤트 */}
+        {/* </Link>*/}
         <div id="date">오늘</div>
       </div>
       <div className="Posts">
