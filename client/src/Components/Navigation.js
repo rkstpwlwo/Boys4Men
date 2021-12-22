@@ -4,7 +4,7 @@ import "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
-function Nav({ isLogin, LogoutHandler }) {
+function Nav({ isLogin, LogoutHandler,history }) {
   return (
     <div>
       <div id="nav">
@@ -19,7 +19,15 @@ function Nav({ isLogin, LogoutHandler }) {
           </div>
         </Link>
         {/* {isLogin ? ( */}
-        <Link to="/Mypage" style={{ textDecoration: "none" }}>
+        {/* <Link to="/Mypage" style={{ textDecoration: "none" }}> */}
+        <Link onClick={()=>{
+          if(isLogin){
+            history.push('/Mypage');
+          }
+          else{
+            alert('로그인후 접근 가능')
+          }
+        }} style={{ textDecoration: "none" }}>
           <div className="nav_element">
             마이 페이지 <i className="fas fa-user"></i>
           </div>

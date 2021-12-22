@@ -20,6 +20,7 @@ function App() {
   const [isLogin, setLogin] = useState(false);
   // const [userInfo, setuserInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null); // 토큰을 가져옴
+  const url="http://localhost:80";
 
   function issueAccessToken(token) {
     setAccessToken({ accessToken: token });
@@ -33,7 +34,7 @@ function App() {
   // 로그아웃요청 API
   function LogoutHandler() {
     axios
-      .post("url/user/logout", {
+      .post(`${url}/user/logout`, {
         headers: { Authorization: `Bearer ${accessToken}` },
       })
       .then((result) => {
@@ -85,7 +86,7 @@ function App() {
                 <Mypage accessToken={accessToken} region={region} />
               </Route>
               <Route path="/Signup">
-                <Signup region={region} />
+                <Signup region={region} url={url}/>
               </Route>
               <Route path="/Writing">
                 <Writing />
