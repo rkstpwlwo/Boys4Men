@@ -72,7 +72,7 @@ function App() {
     <div>
       <BrowserRouter>
         <div>
-          <Nav isLogin={isLogin} LogoutHandler={LogoutHandler} />
+          <Nav isLogin={isLogin} LogoutHandler={LogoutHandler}/>
           {/* mbti 탭 */}
         </div>
         <div>
@@ -85,7 +85,7 @@ function App() {
                 <Board accessToken={accessToken} isLogin={isLogin} />
               </Route>
               <Route path="/Login">
-                <Login LoginHandler={LoginHandler} />
+                <Login LoginHandler={LoginHandler} url={url}/>
               </Route>
               <Route path="/Mypage">
                 <Mypage accessToken={accessToken} region={region} />

@@ -1,10 +1,11 @@
 import React from "react";
 import "./Components.css";
 import "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { useState } from "react";
 
-function Nav({ isLogin, LogoutHandler,history }) {
+function Nav({ isLogin, LogoutHandler }) {
+  const history=useHistory();
   return (
     <div>
       <div id="nav">
@@ -22,7 +23,7 @@ function Nav({ isLogin, LogoutHandler,history }) {
         {/* <Link to="/Mypage" style={{ textDecoration: "none" }}> */}
         <Link onClick={()=>{
           if(isLogin){
-            history.push('/Mypage');
+            history.push("/Mypage");
           }
           else{
             alert('로그인후 접근 가능')
