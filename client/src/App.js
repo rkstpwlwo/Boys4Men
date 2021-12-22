@@ -11,6 +11,7 @@ import Signup from "./Pages/Signup";
 import Board from "./Pages/board/Board";
 import SurveyLink from "./Pages/SurveyLink";
 import Writing from "./Pages/board/Writing";
+import axios from "axios";
 function App() {
   const [isLogin, setLogin] = useState(false);
   // const [userInfo, setuserInfo] = useState(null);
@@ -27,12 +28,14 @@ function App() {
 
   // 로그아웃요청 API
   function LogoutHandler() {
-    // axios
-    //   .post(url, { headers: { Authorization: `Bearer ${accessToken}` } })
-    //   .then((result) => {
-    //     setLogin(false);
-    //     accessToken(null);
-    //   });
+    axios
+      .post("url/user/logout", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((result) => {
+        setLogin(false);
+        accessToken(null);
+      });
   }
 
   const region = [
@@ -66,7 +69,6 @@ function App() {
             <div>
               <Route exact path="/">
                 <Mbti />
-                <SurveyLink />
               </Route>
               <Route path="/board">
                 <Board accessToken={accessToken} isLogin={isLogin} />
@@ -82,6 +84,9 @@ function App() {
               </Route>
               <Route path="/Writing">
                 <Writing />
+              </Route>
+              <Route path="/SurveyLink">
+                <SurveyLink />
               </Route>
             </div>
           </Switch>

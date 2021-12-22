@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Board.css";
+import axios from "axios";
 
-function Board({ isLogin }) {
+function Board({ accessToken, isLogin }) {
   // 특정 mbti 게시물 목록조회 API
-  const [posts, setposts] = useState({
-    writer: "kim",
-    mbti: "ENFP",
-    title: "야호 첫글",
-    date: "오늘",
-  });
-  function MbtiPost({ accessToken }) {
-    // axios
-    //   .get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
-    //   .then((result) => {});
+  const [posts, setposts] = useState(null);
+  function MbtiPost(accessToken) {
+    axios
+      .get("url", { headers: { Authorization: `Bearer ${accessToken}` } })
+      .then((result) => {});
   }
-  function filterPosts(e) {}
+
+  // 특정 게시물의 내용을 조회하는 API (글을 클릭했을 때 내용이 나옴)
+  function Content(accessToken) {
+    axios.get("url", { headers: { Authorization: `Bearer ${accessToken}` } });
+  }
 
   const mbti = [
     "전체 글보기",
@@ -38,13 +38,15 @@ function Board({ isLogin }) {
   ];
   return (
     <div id="Board">
-      <div id="boardtitle">MBTI 게시판</div>
-      <div>
-        <select style={{ padding: "10px", margin: "20px" }}>
-          {mbti.map((el) => {
-            return <option>{el}</option>;
-          })}
-        </select>
+      <div id="boardtitle">
+        MBTI 게시판
+        <div>
+          <select style={{ padding: "10px", margin: "20px" }}>
+            {mbti.map((el) => {
+              return <option>{el}</option>;
+            })}
+          </select>
+        </div>
       </div>
       <div className="Post">
         <div id="writer">작성자</div>
@@ -53,9 +55,10 @@ function Board({ isLogin }) {
         <div id="date">작성날짜</div>
       </div>
       <div className="Posts">
-        <div id="writer">kim</div>
+        <div id="writer">Kim</div>
         <div id="MBTI">ENFP</div>
         <div id="title">야호 첫글</div>
+        {/* onClick 이벤트 */}
         <div id="date">오늘</div>
       </div>
       <div className="Posts">
@@ -66,18 +69,20 @@ function Board({ isLogin }) {
       </div>
 
       <div>
-        <button
-          id="Posting"
-          onClick={() => {
-            if (!isLogin) {
+        {isLogin ? (
+          <button
+            id="Posting"
+            onClick={() => {
               return alert("로그인이 필요합니다");
-            } else {
-              // 글쓰기 페이지로 렌더링
-            }
-          }}
-        >
-          글쓰기
-        </button>
+            }}
+          >
+            글쓰기
+          </button>
+        ) : (
+          <Link to="/Writing">
+            <button id="Posting">글쓰기</button>
+          </Link>
+        )}
         {/* <Link to="/Writing">
           <button>글쓰기2</button>
         </Link> */}

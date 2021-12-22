@@ -1,6 +1,6 @@
 import { useState } from "react";
 import React from "react";
-import { Redirect } from "react-router-dom";
+import axios from "axios";
 
 function Mypage({ accessToken, region }) {
   // 기존에 나와야할 정보는 아이디 ,닉네임 ,MBTI,지역
@@ -11,9 +11,16 @@ function Mypage({ accessToken, region }) {
 
   // 유저정보를 요청하는 API
   function accessTokenRequset() {
-    // axios
-    //   .get(url, { headers: { Authorization: `Bearer ${accessToken}` } })
-    //   .then((result) => {});
+    axios
+      .get("url/user/info", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      })
+      .then((result) => {
+        setUserId({ userId: result.data.data.id });
+        setUsername({ Username: result.data.data.userName });
+        setAddress({ Address: result.data.data.city });
+        setMBTI({ MBTI: result.data.data.mbti });
+      });
   }
   accessTokenRequset(); //유저의 정보를 받아옴
 
@@ -69,27 +76,34 @@ function Mypage({ accessToken, region }) {
 
   // 회원정보 수정 API
   function putUserInfo() {
-    // axios.patch(url,{userName : newUsername.newUsername ,city : newAddress.newAddress },
-    // {headers : {Authorization : `Bearer ${accessToken}`}}).then((result) => {
-    // })
+    axios
+      .patch(
+        "url/user/info",
+        { userName: newUsername.newUsername, city: newAddress.newAddress },
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      )
+      .then((result) => {});
   }
   // 비밀번호 변경 API
   function putPassword() {
-    // axios.patch(
-    //   url,
-    //   { password: changedpassword.changedpassword },
-    //   { headers: { Authorization: `Bearer ${accessToken}` } }
-    // );
+    axios.patch(
+      "url/user/password",
+      { password: changedpassword.changedpassword },
+      { headers: { Authorization: `Bearer ${accessToken}` } }
+    );
   }
 
   // 회원탈퇴 API
   function deleteUserInfo() {
-    // axios.delete(url, { headers: { Authorization: `Bearer ${accessToken}` } });
+    axios.delete("url/del", {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
     // 삭제 성공시 204 상태코드만 반환하므로 message가 오지 않는다
   }
   return (
     <div className="Mypage">
       {/* 회원탈퇴 버튼*/}
+      <div id="MyPageTitle">My Page</div>
       {openWithdrawal ? (
         <div className="checkpassword">
           <br />
@@ -97,7 +111,7 @@ function Mypage({ accessToken, region }) {
           <br />
           <div>정말로 회원탈퇴 하시겠습니까?</div>
           <br />
-          <div>회원탈퇴를 원하신다면 비밀번호를 입력해주세요</div>
+
           <br />
           <input
             type="password"
@@ -117,8 +131,7 @@ function Mypage({ accessToken, region }) {
           >
             확인
           </button>
-          <br />
-          <br />
+
           <button
             onClick={() => {
               setopenWithdrawal(false);
@@ -135,10 +148,10 @@ function Mypage({ accessToken, region }) {
         <div className="checkpassword">
           <br />
           <br />
+          <div>비밀번호를 변경하시겠습니까?</div>
           <br />
-          <div>비밀번호를 변경합니다</div>
           <br />
-          <div>비밀번호 변경을 원하시면 현재 비밀번호를 입력해주세요</div>
+          <div>현재 비밀번호</div>
           <input
             type="password"
             placeholder="현재 비밀번호"
@@ -147,13 +160,15 @@ function Mypage({ accessToken, region }) {
           ></input>
           <br />
           <br />
-          <div>변경할 비밀번호를 입력해주세요</div>
+          <div>변경할 비밀번호</div>
           <input
             type="password"
             placeholder="변경할 비밀번호(5자 이상)"
             value={changedpassword.changedpassword}
             onChange={inputchangedpassword}
           ></input>
+          <br />
+          <br />
           <div>비밀번호 확인</div>
           <input
             type="password"
@@ -183,8 +198,7 @@ function Mypage({ accessToken, region }) {
           >
             확인
           </button>
-          <br />
-          <br />
+
           <button
             onClick={() => {
               setopenPassword(!openPassword);
@@ -198,15 +212,19 @@ function Mypage({ accessToken, region }) {
       )}
       <div className="MypageText">
         <div id="MypageMBTI">
-          <div>MBTI</div>
-          <div>MBTI 이미지가 들어감</div>
-          <input placeholder="유저의 MBTI 정보" disabled></input>
+          <div style={{ fontSize: "50px" }}>ISFP</div>
+          <div>
+            <img
+              className="MBTIimg"
+              src="https://images.unsplash.com/photo-1517697471339-4aa32003c11a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80"
+            />
+          </div>
         </div>
-        <div>아이디</div>
+        아이디
         <input type="text" placeholder="유저의 아이디" disabled></input>
         <br />
         <br />
-        <div>닉네임</div>
+        닉네임
         <input
           type="text"
           placeholder="유저의 닉네임(수정 가능)"
@@ -214,26 +232,27 @@ function Mypage({ accessToken, region }) {
           maxLength="12"
           onChange={inputnewUsername}
         ></input>
-
         <br />
         <br />
-        <div>지역 변경</div>
-        <select onChange={inputAddress} className="select">
-          <option>거주하는 지역을 선택하세요</option>
-          {region.map((city) => {
-            return <option>{city}</option>;
-          })}
-        </select>
+        <div>
+          지역 변경{" "}
+          <select onChange={inputAddress} className="select">
+            <option>거주하는 지역을 선택하세요</option>
+            {region.map((city) => {
+              return <option>{city}</option>;
+            })}
+          </select>
+        </div>
         <br />
         <br />
-        <div style={{ fontSize: "17px", color: "#92198D" }}>기존 지역 :</div>
+        {/* <div style={{ fontSize: "17px", color: "#92198D" }}>기존 지역 :</div> */}
         <br />
         <br />
         <br />
         {/* 회원정보 수정 */}
         {openUserInfo ? (
           <div className="updateUserInfo">
-            <div>회원정보 수정을 원하시면 비밀번호를 입력해주세요</div>
+            <div>회원정보 수정을 원하십니까?</div>
             <br />
 
             <input
@@ -262,7 +281,7 @@ function Mypage({ accessToken, region }) {
                 // 현재 비밀번호를 확인하고 axios.update
               }}
             >
-              회원정보 수정하기
+              확인
             </button>
           </div>
         ) : (

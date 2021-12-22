@@ -1,18 +1,27 @@
 #Board {
   text-align: center;
+  padding-bottom: 500px;
   padding-top: 60px;
+  background-color: #dafff7;
 }
 #boardtitle {
-  font-size: 30px;
-  color: #18a2e7;
+  font-size: 50px;
+  font-family: "Nanum Pen Script", cursive;
+  color: black;
 }
+
 .Post {
+  margin: 0 auto;
   display: flex;
-  padding: 40px;
-  background-color: #1e548b;
+  position: relative;
+  width: 900px;
+  padding: 20px;
+  padding-left: 43px;
+  background-color: #214377;
   color: white;
   font-weight: bold;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid #3480fb;
+  border: 2px solid white;
 }
 
 .Post > #title {
@@ -28,7 +37,10 @@
   flex: 2 1 auto;
 }
 .Posts {
+  margin: 0 auto;
   display: flex;
+  position: relative;
+  width: 900px;
   padding: 20px;
   padding-left: 43px;
   background-color: #8abde9;
@@ -39,6 +51,7 @@
 
 .Posts > #title {
   flex: 4 1 auto;
+  cursor: pointer;
 }
 .posts > #MBTI {
   flex: 1 1 auto;
@@ -52,11 +65,9 @@
 
 #Posting {
   padding: 20px;
-  background-color: #7fb7ef;
-  border: 2px solid white;
-  position: absolute;
-  text-align: center;
-  bottom: 0px;
+  /* margin: 0 auto; */
+  background-color: #1f3e85;
+  border: 3px solid white;
   color: white;
   font-weight: bold;
   cursor: pointer;
