@@ -18,6 +18,7 @@ module.exports={
       }
     });
   },
+
   nameCheck:(req,res)=>{
     let name=req.body.name;
     if(!name){
