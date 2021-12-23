@@ -34,7 +34,7 @@ import {
   ENFPComponent,
 } from "./Pages/MbtiPage/Mbtiexplain";
 import Genre from "./Pages/GenrePage/GenrePage";
-import {GenreDetail,} from "./Pages/GenrePage/GenreExplain";
+import {GenreDetail} from "./Pages/GenrePage/GenreExplain";
 
 function App() {
   const [isLogin, setLogin] = useState(false);
