@@ -43,7 +43,7 @@ function App() {
 
   // const [userInfo, setuserInfo] = useState(null);
   const [accessToken, setAccessToken] = useState({ accessToken: "" }); // 토큰을 가져옴
-  const url = "http://localhost:80";
+  const url = "http://ec2-3-36-70-242.ap-northeast-2.compute.amazonaws.com";
   const history = useHistory();
 
   function issueAccessToken(token) {
@@ -158,6 +158,7 @@ function App() {
                 <MBTISurveyResult
                   accessToken={accessToken}
                   userMbti={userMbti}
+                  url={url}
                 />
               </Route>
               <Route path="/mbti/istj">
