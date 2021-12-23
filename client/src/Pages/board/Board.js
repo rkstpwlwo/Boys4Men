@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Board.css";
 import axios from "axios";
 
 function Board({ accessToken, isLogin }) {
+  const history = useHistory();
   // 특정 mbti 게시물 목록조회 API
   const [posts, setposts] = useState(null);
   function MbtiPost(accessToken) {
@@ -53,12 +54,17 @@ function Board({ accessToken, isLogin }) {
         </div>
       </div>
       <div className="Post">
-        <div id="writer">작성자</div>
-        <div id="MBTI">성격유형</div>
-        <div id="title">제목</div>
-        <div id="date">작성날짜</div>
+        <div className="writer">작성자</div>
+        <div className="MBTI">성격유형</div>
+        <div className="title">제목</div>
+        <div className="date">작성날짜</div>
       </div>
-      <div className="Posts">
+      <div
+        className="Posts"
+        onClick={() => {
+          history.push("/Reading");
+        }}
+      >
         <div id="writer">Kim</div>
         <div id="MBTI">ENFP</div>
         {/* <Link to="/Writing"> */}
