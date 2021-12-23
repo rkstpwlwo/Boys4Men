@@ -40,96 +40,96 @@ export default function MbtiRouter() {
         <SurveyLink />
         <ul>
           <li>
-            <Link to="/mbti/istj" id="istj">
+            <Link to="/mbti/istj" className="font">
               ISTJ
             </Link>{" "}
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/intj" id="intj">
+            <Link to="/mbti/intj" className="font">
               INTJ
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/estj" id="estj">
+            <Link to="/mbti/estj" className="font">
               ESTJ
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/entj" id="entj">
+            <Link to="/mbti/entj" className="font">
               ENTJ
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/istp" id="istp">
+            <Link to="/mbti/istp" className="font">
               ISTP
             </Link>
           </li>
           <li>
-            <Link to="/mbti/intp" id="intp">
+            <Link to="/mbti/intp" className="font">
               INTP
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/estp" id="estp">
+            <Link to="/mbti/estp" className="font">
               ESTP
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/entp" id="entp">
+            <Link to="/mbti/entp" className="font">
               ENTP
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/isfj" id="isfj">
+            <Link to="/mbti/isfj" className="font">
               ISFJ
             </Link>
           </li>
           <li>
-            <Link to="/mbti/infj" id="infj">
+            <Link to="/mbti/infj" className="font">
               INFJ
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
 
           <li>
-            <Link to="/mbti/esfj" id="esfj">
+            <Link to="/mbti/esfj" className="font">
               ESFJ
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
 
           <li>
-            <Link to="/mbti/enfj" id="enfj">
+            <Link to="/mbti/enfj" className="font">
               ENFJ
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/isfp" id="isfp">
+            <Link to="/mbti/isfp" className="font">
               ISFP
             </Link>
           </li>
           <li>
-            <Link to="/mbti/infp" id="infp">
+            <Link to="/mbti/infp" className="font">
               INFP
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/esfp" id="esfp">
+            <Link to="/mbti/esfp" className="font">
               ESFP
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}
           </li>
           <li>
-            <Link to="/mbti/enfp" id="enfp">
+            <Link to="/mbti/enfp" className="font">
               ENFP
             </Link>
             {/* Link 컴포넌트를 이용하여 경로를 연결합니다 */}

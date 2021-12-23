@@ -10,6 +10,7 @@ import Mypage from "./Pages/Mypage";
 import Signup from "./Pages/Signup";
 import Board from "./Pages/board/Board";
 import Writing from "./Pages/board/Writing";
+import Reading from "./Pages/board/Reading";
 import axios from "axios";
 import MbtiPage from "./Pages/MbtiPage/MbtiPage";
 import MBTISearch from "./Pages/MBTIsearch/Mbtisearch";
@@ -154,6 +155,9 @@ function App() {
               </Route>
               <Route path="/Writing">
                 <Writing accessToken={accessToken} />
+              </Route>
+              <Route path="/Reading">
+                <Reading accessToken={accessToken} />
               </Route>
               <Route path="/MBTIsearch">
                 <MBTISearch

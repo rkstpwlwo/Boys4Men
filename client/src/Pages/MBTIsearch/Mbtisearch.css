@@ -3,54 +3,69 @@ body {
 }
 #MBTISearch {
   color: black;
-  float: left;
-  font-size: 35px;
-  font-family: "Nanum Pen Script", cursive;
+  font-size: 20px;
+  font-family: "Cute Font", cursive;
+
   /* width: 100%; */
 }
-#searchEnd {
-  display: inline-block;
-  font-family: "Nanum Pen Script", cursive;
-  margin-left: 1050px;
-  width: 130px;
-  height: 60px;
+#border {
+  border: 2px solid black;
+}
+#center {
   text-align: center;
-  background: linear-gradient(100deg, #1f6fa5, #0481f7);
-  border-top: 2px solid black;
-  border-left: 1px solid black;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
-  border-radius: 10px;
-  font-size: 40px;
-  padding: 20px;
-  color: white;
-  /* border-top: 100px; */
+  font-weight: bold;
+  font-size: 25px;
 }
-#searchEnd:hover {
-  background: #2354b8;
-}
-#save {
-  padding: 20px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-#save:hover {
-  background-color: #749cce;
-}
-#save:active {
-  background-color: #69e8ee;
-}
-#twenty {
-  width: 420px;
-  margin: 10px 0px;
-}
+
 div[id="MBTISearch"] div div {
   margin-top: 10px;
 }
 div[id="MBTISearchTitle"] {
-  font-size: 40px;
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+}
+.searchbutton1 {
+  /* position: fixed; */
+  bottom: 100px;
+  padding: 20px;
+  width: 200px;
+  margin: 0 auto;
+  border-radius: 40px;
+  font-size: 20px;
+  color: white;
+  background-color: #acd5e5;
+  cursor: pointer;
+  border: 2px solid white;
+  font-family: "Cute Font", cursive;
+}
+.searchbutton2 {
+  /* position: fixed; */
+  padding: 20px;
+  width: 200px;
+  border-radius: 20px;
+  font-size: 20px;
+  color: white;
+  background-color: #176380;
+  cursor: pointer;
+  border: 2px solid white;
+  font-family: "Cute Font", cursive;
+  float: right;
+}
+.searchbutton1:hover {
+  background-color: #78c6e4;
+  color: white;
+}
+.searchbutton2:hover {
+  background-color: #78c6e4;
+  color: white;
 }
 
-#check {
-  border: 2px solid black;
+input[type="checkbox"] {
+  position: sticky;
+  left: 0px;
+  width: 40px;
+  height: 15px;
+  cursor: pointer;
+  zoom: 1.5;
 }

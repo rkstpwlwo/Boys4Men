@@ -99,95 +99,89 @@ export default function MBTISearch({ accessToken, getMbti, userMbti }) {
   return (
     <div id="MBTISearch">
       <div id="MBTISearchTitle">성격유형 검사</div>
-      <div>
+      <div id="border">
+        <div id="center">
+          <i class="fas fa-check-square"></i> 해당되는 항목에 체크해주세요
+        </div>
         <div>
-          <span>1. 모임같은 자리에 나가는 것을 좋아합니다.</span>
-          <input
-            className="check"
-            type="checkbox"
-            name="마음"
-            onClick={test1}
-          ></input>
+          <input type="checkbox" onClick={test1}></input>
+          <span>모임같은 자리에 나가는 것을 좋아합니다.</span>
+        </div>
+        <div>
+          <input type="checkbox" onClick={test1}></input>
+          <span>처음보는 사람들과 대화하는 것에 부담감을 갖지 않습니다.</span>
+        </div>
+        <div>
+          <input type="checkbox" onClick={test1}></input>
+          <span>
+            혼자있는 것 보단 사람들과 같이 어울려 시간을 보내는 것이 좋습니다
+          </span>
+        </div>
+        <div>
+          <input type="checkbox" onClick={test2}></input>
+          <span>
+            현실에 일어나는 일보다 미래의 일에 대해 생각을 많이 하는 편입니다.
+          </span>
+        </div>
+        <div>
+          <input type="checkbox" onClick={test2}></input>
+          <span>자신만의 생각에 빠질 때가 종종 있습니다.</span>
         </div>
         <div>
           <span>
-            2. 처음보는 사람들과 대화하는 것에 부담감을 갖지 않습니다.
+            <input type="checkbox" onClick={test2}></input>
+            영화나 소설을 보면서 숨겨진 의미나 해석을 찾아보곤 합니다.{" "}
           </span>
-          <input type="checkbox" name="마음" onClick={test1}></input>
         </div>
         <div>
+          <input type="checkbox" onClick={test3}></input>
           <span>
-            3. 혼자있는 것 보단 사람들과 같이 어울려 시간을 보내는 것이 좋습니다
+            결과물에 대해 무조건적인 칭찬보다는 객관적으로 평가 받기를 원합니다.{" "}
           </span>
-          <input type="checkbox" name="마음" onClick={test1}></input>
         </div>
         <div>
+          <input type="checkbox" onClick={test3}></input>
           <span>
-            4. 현실에 일어나는 일보다 미래의 일에 대해 생각을 많이 하는
-            편입니다.
+            상대를 위로할때 공감해주기보다는 조언을 많이 해주는 편입니다.{" "}
           </span>
-          <input type="checkbox" name="마음" onClick={test2}></input>
         </div>
         <div>
-          <span>5. 자신만의 생각에 빠질 때가 종종 있습니다.</span>
-          <input type="checkbox" name="에너지" onClick={test2}></input>
+          <input type="checkbox" onClick={test3}></input>
+          <span>과정보다 결과를 중시하는 경향이 있습니다. </span>
         </div>
         <div>
-          <span>
-            6. 영화나 소설을 보면서 숨겨진 의미나 해석을 찾아보곤 합니다.{" "}
-          </span>
-          <input type="checkbox" name="에너지" onClick={test2}></input>
+          <input type="checkbox" onClick={test4}></input>
+          <span>달라진 환경에서 적응을 잘하는 편입니다. </span>
         </div>
         <div>
-          <span>
-            7. 결과물에 대해 무조건적인 칭찬보다는 객관적으로 평가 받기를
-            원합니다.{" "}
-          </span>
-          <input type="checkbox" name="에너지" onClick={test3}></input>
+          <input type="checkbox" onClick={test4}></input>
+          <span>계획을 세우지 않을 때가 더 많습니다.</span>
         </div>
         <div>
-          <span>
-            8. 상대를 위로할때 공감해주기보다는 조언을 많이 해주는 편입니다.{" "}
-          </span>
-          <input type="checkbox" name="본성" onClick={test3}></input>
+          <input type="checkbox" onClick={test4}></input>
+          <span>일정을 계획할 때 다소 여유롭게 일정을 세우는 편입니다. </span>
         </div>
-        <div>
-          <span>9. 과정보다 결과를 중시하는 경향이 있습니다. </span>
-          <input type="checkbox" name="본성" onClick={test3}></input>
-        </div>
-        <div>
-          <span>10. 달라진 환경에서 적응을 잘하는 편입니다. </span>
-          <input type="checkbox" name="본성" onClick={test4}></input>
-        </div>
-        <div>
-          <span>11. 계획을 세우지 않을 때가 더 많습니다.</span>
-          <input type="checkbox" name="본성" onClick={test4}></input>
-        </div>
-        <div>
-          <span>
-            12. 일정을 계획할 때 다소 여유롭게 일정을 세우는 편입니다.{" "}
-          </span>
-          <input type="checkbox" name="본성" onClick={test4}></input>
-        </div>
+        <button
+          className="searchbutton1"
+          onClick={() => {
+            Mbtiresult();
+          }}
+        >
+          결과값 저장
+        </button>
       </div>
-      <button
-        id="save"
-        onClick={() => {
-          Mbtiresult();
-        }}
-      >
-        결과값 저장하기
-      </button>
+
       {/* 클릭 이벤트 발생시 서버에 mnti유형을 저장하는 API요청*/}
+
       <Link to="/MBTISurveyResult">
-        <div
-          id="searchEnd"
+        <button
+          className="searchbutton2"
           onClick={() => {
             return sendMbti;
           }}
         >
           결과확인
-        </div>
+        </button>
       </Link>
     </div>
   );
