@@ -4,10 +4,11 @@
   padding-top: 60px;
   background-color: #dafff7;
 }
-#boardtitle {
+.boardtitle {
   font-size: 50px;
   font-family: "Nanum Pen Script", cursive;
   color: black;
+  text-align: center;
 }
 
 .Post {
@@ -79,12 +80,11 @@
 }
 
 #Writing {
-  border: 3px solid black;
-  padding: 20px;
-  position: absolute;
-  left: 400px;
-  top: 200px;
+  /* border: 3px solid black; */
+  margin: 0 auto;
+  font-size: 30px;
   text-align: center;
+  font-family: "Nanum Pen Script", cursive;
 }
 #WritingTitle {
   width: 700px;
@@ -92,4 +92,10 @@
 #WritingContent {
   width: 700px;
   height: 1000px;
+}
+
+.WritingButton {
+  border-radius: 20px;
+  padding: 20px;
+  margin: 50px;
 }

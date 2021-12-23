@@ -153,7 +153,7 @@ function App() {
                 <Signup region={region} url={url} />
               </Route>
               <Route path="/Writing">
-                <Writing />
+                <Writing accessToken={accessToken} />
               </Route>
               <Route path="/MBTIsearch">
                 <MBTISearch

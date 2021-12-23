@@ -42,8 +42,8 @@ function Board({ accessToken, isLogin }) {
   ];
   return (
     <div id="Board">
-      <div id="boardtitle">
-        MBTI 게시판
+      <div className="boardtitle">
+        게시판
         <div>
           <select style={{ padding: "10px", margin: "20px" }}>
             {mbti.map((el) => {
@@ -54,7 +54,7 @@ function Board({ accessToken, isLogin }) {
       </div>
       <div className="Post">
         <div id="writer">작성자</div>
-        <div id="MBTI">MBTI</div>
+        <div id="MBTI">성격유형</div>
         <div id="title">제목</div>
         <div id="date">작성날짜</div>
       </div>
@@ -89,6 +89,7 @@ function Board({ accessToken, isLogin }) {
             <button id="Posting">글쓰기</button>
           </Link>
         )}
+        {/* 글쓰기 버튼 클릭시 로그인한 사용자만 글을 작성할 수 있게 합니다 isLogin부분을 !isLogin으로 수정하시면 됩니다 */}
         {/* <Link to="/Writing">
           <button>글쓰기2</button>
         </Link> */}

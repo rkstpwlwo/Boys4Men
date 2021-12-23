@@ -94,12 +94,11 @@ export default function MBTISearch({ accessToken, getMbti, userMbti }) {
       { mbti: Mbtiresult() },
       { headers: { Authorization: `Bearer ${accessToken}` } }
     );
-    console.log(userMbti);
   }
 
   return (
     <div id="MBTISearch">
-      <div id="MBTISearchTitle">MBTI검사</div>
+      <div id="MBTISearchTitle">성격유형 검사</div>
       <div>
         <div>
           <span>1. 모임같은 자리에 나가는 것을 좋아합니다.</span>
@@ -177,7 +176,7 @@ export default function MBTISearch({ accessToken, getMbti, userMbti }) {
           Mbtiresult();
         }}
       >
-        MBTI 결과 저장하기
+        결과값 저장하기
       </button>
       {/* 클릭 이벤트 발생시 서버에 mnti유형을 저장하는 API요청*/}
       <Link to="/MBTISurveyResult">
