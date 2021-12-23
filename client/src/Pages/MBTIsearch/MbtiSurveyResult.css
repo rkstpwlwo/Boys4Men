@@ -3,6 +3,8 @@
   font-family: "IBM Plex Sans KR", sans-serif;
   /* white-space: normal; */
 }
+#top {
+}
 img[id="image"] {
   width: 395px;
   height: 330px;
@@ -16,10 +18,8 @@ div[id="imageTag"] {
 }
 #explain {
   width: 1220px;
-  margin-top: 10px;
-  margin-right: 10px;
+
   /* margin-bottom: 6px; */
-  margin-left: 22px;
   /* left: 20px; */
   display: inline-flex;
   border: 5px solid black;

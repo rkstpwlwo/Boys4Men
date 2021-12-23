@@ -1,7 +1,12 @@
 import "./GenrePage.css";
 import React from "react";
+import axios from "axios";
 import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
 function Punk() {
+  // 초기화면을 위한 데이터(Genre이름, 이미지)를 요청하는 API
+  function getGenre() {
+    return axios.get(`url/genre`).then((result) => {});
+  }
   return (
     <div id="Punk">
       <span>

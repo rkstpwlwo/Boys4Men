@@ -49,16 +49,18 @@ import {
 
 function App() {
   const [isLogin, setLogin] = useState(false);
-  // const [userInfo, setuserInfo] = useState(null);
   const [accessToken, setAccessToken] = useState(null); // 토큰을 가져옴
+  const [userMbti, setuserMbti] = useState(null); //mbti
 
   function issueAccessToken(token) {
     setAccessToken({ accessToken: token });
   }
-
   function LoginHandler(data) {
     setLogin(true);
     issueAccessToken(data);
+  }
+  function getMbti(mbti) {
+    setuserMbti(mbti);
   }
 
   // 로그아웃요청 API
@@ -100,6 +102,7 @@ function App() {
     //   setpost({id  ,writer , mbti,title,content,sameUser })
     // })
   }
+
   return (
     <div>
       <BrowserRouter>
@@ -129,10 +132,17 @@ function App() {
                 <Writing />
               </Route>
               <Route path="/MBTIsearch">
-                <MBTISearch />
+                <MBTISearch
+                  accessToken={accessToken}
+                  userMbti={userMbti}
+                  getMbti={getMbti}
+                />
               </Route>
               <Route path="/MBTISurveyResult">
-                <MBTISurveyResult />
+                <MBTISurveyResult
+                  accessToken={accessToken}
+                  userMbti={userMbti}
+                />
               </Route>
               <Route path="/mbti/istj">
                 <ISTJComponent />
