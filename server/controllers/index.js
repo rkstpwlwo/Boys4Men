@@ -19,6 +19,8 @@ module.exports={
   },
 
   genreController:{
-    genre:require('./genre')
+    get:require('./genre/get'),
+    getMbti:require('./genre/getMbti'),
+    getGenre:require('./genre/getGenre')
   }
 }

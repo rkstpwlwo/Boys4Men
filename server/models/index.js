@@ -121,6 +121,35 @@ module.exports = {
     },
   },
   genre:{
+    get:(callback)=>{
+      const queryString='select name,img from genre';
+      const connection=createConnection();
+      connection.query(queryString,function(err,result){
+        callback(err,result);
+      })
+      endConnection(connection);
+    },
+    getGenre:(genreName,callback)=>{
+      const queryString=`select song.artist,song.name,genre.img,genre.description from song,genre 
+                          where genre.id=song.genreId and genre.name=?`;
+      const connection=createConnection();
+      connection.query(queryString,[genreName],function(err,result){
+        callback(err,result);
+      });
+      endConnection(connection);
+    },
+    getMbti:(mbti,callback)=>{
+      const queryString=`select song.name,song.artist,genre.name as genreName from song,genre 
+                        where song.genreId=genre.id
+                        and song.genreId in (select genreId from genre_mbti where mbti=?)`
+      const connection=createConnection();
+      connection.query(queryString,[mbti],function(err,result){
+        callback(err,result);
+      });
+      endConnection(connection);
+    }
+  },
+  genre2:{
     get:(name, img, description, mbti, callback)=>{
       if(mbti) {
         const queryString=`
