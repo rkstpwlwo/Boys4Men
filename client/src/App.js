@@ -5,7 +5,7 @@ import Nav from "./Components/Navigation";
 import Footer from "./Components/Footer";
 import Login from "./Pages/Login";
 // import Mbti from "./Pages/Mbti";
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useHistory } from "react-router-dom";
 import Mypage from "./Pages/Mypage";
 import Signup from "./Pages/Signup";
 import Board from "./Pages/board/Board";
@@ -49,8 +49,13 @@ import {
 
 function App() {
   const [isLogin, setLogin] = useState(false);
-  const [accessToken, setAccessToken] = useState(null); // 토큰을 가져옴
+
   const [userMbti, setuserMbti] = useState(null); //mbti
+
+  // const [userInfo, setuserInfo] = useState(null);
+  const [accessToken, setAccessToken] = useState({ accessToken: "" }); // 토큰을 가져옴
+  const url = "http://localhost:80";
+  const history = useHistory();
 
   function issueAccessToken(token) {
     setAccessToken({ accessToken: token });
@@ -65,13 +70,22 @@ function App() {
 
   // 로그아웃요청 API
   function LogoutHandler() {
-    axios
-      .post("url/user/logout", {
-        headers: { Authorization: `Bearer ${accessToken}` },
-      })
-      .then((result) => {
+    axios({
+      method: "POST",
+      url: `${url}/user/logout`,
+      headers: { authorization: `Bearer ${accessToken.accessToken}` },
+    })
+      .then((res) => {
+        setAccessToken({ accessToken: "" });
         setLogin(false);
-        accessToken(null);
+        alert("로그아웃 되었습니다.");
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          alert("유효하지않은 토큰입니다.");
+        } else {
+          alert("server error");
+        }
       });
   }
 
@@ -107,7 +121,11 @@ function App() {
     <div>
       <BrowserRouter>
         <div>
-          <Nav isLogin={isLogin} LogoutHandler={LogoutHandler} />
+          <Nav
+            isLogin={isLogin}
+            LogoutHandler={LogoutHandler}
+            history={history}
+          />
         </div>
         <div>
           <Switch>
@@ -120,13 +138,19 @@ function App() {
                 <Board accessToken={accessToken} isLogin={isLogin} />
               </Route>
               <Route path="/Login">
-                <Login LoginHandler={LoginHandler} />
+                <Login LoginHandler={LoginHandler} url={url} />
               </Route>
               <Route path="/Mypage">
-                <Mypage accessToken={accessToken} region={region} />
+                <Mypage
+                  accessToken={accessToken}
+                  region={region}
+                  url={url}
+                  setAccessToken={setAccessToken}
+                  setLogin={setLogin}
+                />
               </Route>
               <Route path="/Signup">
-                <Signup region={region} />
+                <Signup region={region} url={url} />
               </Route>
               <Route path="/Writing">
                 <Writing />

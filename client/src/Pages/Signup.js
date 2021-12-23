@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 import { Link } from "react-router-dom";
 
-function Signup({ region }) {
+function Signup({ region,url }) {
+  const history=useHistory();
   const [userId, setUserId] = useState({ userId: "" });
   const [Username, setUsername] = useState({ Username: "" });
   const [password, setPassword] = useState({ password: "" });
@@ -42,25 +44,72 @@ function Signup({ region }) {
   // 회원가입 중복아이디 체크를 위한 API
   function idCheck() {
     // 중복 아이디 체크
-    axios.post("url/user/idCheck", { id: userId.userId }).then((result) => {});
+    if(userId.userId===''){
+      alert('id를 입력해주세요');
+      return;
+    }
+    axios({
+      method:'POST',
+      url:`${url}/user/idCheck`,
+      data:{id:userId.userId}
+    }).then((res)=>{
+      if(res.status===200){
+        alert('사용가능한 id입니다.');
+      }
+    }).catch((err)=>{
+      if(err.response.status===409){
+        alert('중복된 id입니다.')
+      }
+      else{
+        alert('error!');
+      }
+    })
   }
 
   // 회원가입 중복닉네임 체크를 위한 API
   function nameCheck() {
     // 중복 닉네임 체크
-    axios
-      .post("url/user/nameCheck", { name: Username.Username })
-      .then((result) => {});
+    if(Username.Username===''){
+      alert('닉네임을 입력해주세요');
+      return;
+    }
+    axios({
+      method:'POST',
+      url:`${url}/user/nameCheck`,
+      data:{name:Username.Username}
+    }).then((res)=>{
+      if(res.status===200){
+        alert('사용가능한 닉네임입니다.');
+      }
+    }).catch((err)=>{
+      if(err.response.status===409){
+        alert('중복된 닉네임입니다.');
+      }
+      else{
+        alert('error!');
+      }
+    })
   }
   // 회원가입 요청을 위한 API
   function signup() {
     // 회원가입 버튼 클릭시 실행됨
-    axios.post("url/signup", {
-      id: userId.userId,
-      password: password.password,
-      name: Username.Username,
-      city: Address.Address,
-    });
+    axios({
+      method:'POST',
+      url:`${url}/user/signup`,
+      data:{
+        id:userId.userId,
+        password:password.password,
+        userName:Username.Username,
+        city:Address.Address
+      }
+    }).then((res)=>{
+      if(res.status===201){
+        alert('회원가입 완료');
+        history.push('/Login')
+      }
+    }).catch((err)=>{
+      alert('error!')
+    })
   }
   return (
     <div className="signupPage">
@@ -75,7 +124,7 @@ function Signup({ region }) {
           maxLength="12"
           onChange={inputuserId}
         ></input>
-        <button>중복 확인</button>
+        <button onClick={idCheck}>중복 확인</button>
         {/* onClick={() => {idCheck()}} */}
         <br />
         <br />
@@ -86,7 +135,7 @@ function Signup({ region }) {
           maxLength="12"
           onChange={inputUsername}
         ></input>
-        <button>중복 확인</button>
+        <button onClick={nameCheck}>중복 확인</button>
         {/* onClick={() => {nameCheck()}} */}
         <br />
         <br />
@@ -156,9 +205,7 @@ function Signup({ region }) {
               if (password.password !== checkpassword.checkpassword) {
                 return alert("비밀번호를 다시 확인해주세요"); // 비밀번호 확인
               } else {
-                // signup()함수 실행
-                // window.location.assign("localhost:3000/Login");
-                // window.location.assign(window.location.origin+'/Login');
+                signup();
               }
               // 유효성 검사 끝나면 회원가입 완료와 함께 axios.post로 서버에 유저정보를 보냄(signup 함수)
               // 로그인페이지로 렌더링

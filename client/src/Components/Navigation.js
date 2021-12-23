@@ -1,10 +1,11 @@
 import React from "react";
 import "./Components.css";
 import "react-router-dom";
-import { Link } from "react-router-dom";
+import { Link,useHistory } from "react-router-dom";
 import { useState } from "react";
 
 function Nav({ isLogin, LogoutHandler }) {
+  const history=useHistory();
   return (
     <div>
       <div id="nav">
@@ -19,7 +20,15 @@ function Nav({ isLogin, LogoutHandler }) {
           </div>
         </Link>
         {/* {isLogin ? ( */}
-        <Link to="/Mypage" style={{ textDecoration: "none" }}>
+        {/* <Link to="/Mypage" style={{ textDecoration: "none" }}> */}
+        <Link onClick={()=>{
+          if(isLogin){
+            history.push("/Mypage");
+          }
+          else{
+            alert('로그인후 접근 가능')
+          }
+        }} style={{ textDecoration: "none" }}>
           <div className="nav_element">
             마이 페이지 <i className="fas fa-user"></i>
           </div>
@@ -27,7 +36,10 @@ function Nav({ isLogin, LogoutHandler }) {
         </Link>
 
         {isLogin ? (
-          <div className="nav_element">로그아웃</div> // onClick={() => LogoutHandler 실행}
+          <div className="nav_element" onClick={()=>{
+            LogoutHandler();
+            history.push('/');
+          }}>로그아웃</div> // onClick={() => LogoutHandler 실행}
         ) : (
           <Link to="/Login" style={{ textDecoration: "none" }}>
             <div className="nav_element">

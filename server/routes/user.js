@@ -11,6 +11,7 @@ router.patch('/info',userController.info.patch);
 router.delete('/',userController.del);
 router.patch('/password',userController.password);
 router.patch('/mbti',userController.mbti);
+router.post('/authCheck',userController.check.authCheck);
 
 
 

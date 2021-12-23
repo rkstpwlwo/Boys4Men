@@ -39,6 +39,7 @@ module.exports={
     }
     else{
       const userInfo=verifyToken(token);
+      console.log(newInfo,userInfo.id);
       user.patchInfo(userInfo,newInfo,function(err,result){
         if(err){
           res.status(500).send({message:'database unavailable'}).end();

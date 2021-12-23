@@ -1,37 +1,78 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import React from "react";
-import axios from "axios";
+import axios, { Axios } from "axios";
+import { useHistory } from "react-router-dom";
 
-function Mypage({ accessToken, region }) {
+function Mypage({ accessToken, region, url,setAccessToken,setLogin }) {
   // 기존에 나와야할 정보는 아이디 ,닉네임 ,MBTI,지역
-  const [userId, setUserId] = useState({ userId: "" }); // 아이디 (수정 불가)
-  const [Username, setUsername] = useState({ Username: "" }); // 원래 닉네임 (수정 가능)
-  const [Address, setAddress] = useState({ Address: "" }); // 원래 주소 (수정 가능)
-  const [MBTI, setMBTI] = useState({ MBTI: "" }); // 유저의 mbti (수정 불가)
+  const [userInfo,setUserInfo]=useState({
+    id:'',
+    name:'',
+    city:'',
+    mbti:''
+  })
+  const [insertMode,setInsertMode]=useState(false);
+  const history=useHistory();
 
-  // 유저정보를 요청하는 API
-  function accessTokenRequset() {
-    axios
-      .get("url/user/info", {
-        headers: { Authorization: `Bearer ${accessToken}` },
+  function authRequest(){
+    if(password===''){
+      alert('비밀번호를 입력해주세요');
+    }
+    else{
+      axios({
+        method:'POST',
+        url:`${url}/user/authCheck`,
+        data:{password:password},
+        headers:{authorization:`Bearer ${accessToken.accessToken}`}
+      }).then((res)=>{
+        setInsertMode(true);
+        setnewAddress({newAddress:userInfo.city});
+        setnewUsername({newUsername:userInfo.name});
+        setopenUserInfo(false);
+      }).catch((err)=>{
+        if(err.response.status===403){
+          alert('비밀번호 오류');
+        }
       })
-      .then((result) => {
-        setUserId({ userId: result.data.data.id });
-        setUsername({ Username: result.data.data.userName });
-        setAddress({ Address: result.data.data.city });
-        setMBTI({ MBTI: result.data.data.mbti });
-      });
+    }
   }
-  accessTokenRequset(); //유저의 정보를 받아옴
+  // 유저정보를 요청하는 API
+  function accessTokenRequest() {
+    axios({
+      method:'GET',
+      url:`${url}/user/info`,
+      headers:{authorization:`Bearer ${accessToken.accessToken}`}
+    }).then((res)=>{
+      if(res.status===200){
+        setUserInfo({
+          id:res.data.id,
+          name:res.data.userName,
+          city:res.data.city,
+          mbti:res.data.mbti
+        })
+      }
+    }).catch((err)=>{
+      if(err.response.status===401){
+        alert('유효하지 않은 토큰입니다.');
+      }
+      else{
+        alert('server error');
+      }
+    })
+  }
+
+  useEffect(()=>{
+    accessTokenRequest(); //유저의 정보를 받아옴
+  },[]);
 
   // 변경 사항
   const [newUsername, setnewUsername] = useState({ newUsername: "" }); // 변경할 닉네임
-  const [password, setPassword] = useState({ password: "" }); // 현재 비밀번호
+  const [newAddress, setnewAddress] = useState({ newAddress: "" }); // 변경할 주소지
   const [changedpassword, setcheckPassword] = useState({ changedpassword: "" }); // 새로 변경할 비밀번호
   const [checkchangedpassword, setcheckchangedpassword] = useState({
     checkchangedpassword: "",
   }); // 변경할 비밀번호 확인
-  const [newAddress, setnewAddress] = useState({ newAddress: "" }); // 변경할 주소지
+  const [password,setPassword]=useState("");
   const [openUserInfo, setopenUserInfo] = useState(false); // 회원정보 수정을 위해 열리는 모달창
   const [openPassword, setopenPassword] = useState(false); // 비밀번호 변경을 위해 열리는 모달창
   const [openWithdrawal, setopenWithdrawal] = useState(false); // 회원탈퇴를 위해 열리는 모달창
@@ -42,7 +83,7 @@ function Mypage({ accessToken, region }) {
     console.log(newUsername);
   }
   function inputPassword(e) {
-    setPassword({ password: e.target.value });
+    setPassword(e.target.value);
     console.log(password);
   }
   function inputchangedpassword(e) {
@@ -76,28 +117,103 @@ function Mypage({ accessToken, region }) {
 
   // 회원정보 수정 API
   function putUserInfo() {
-    axios
-      .patch(
-        "url/user/info",
-        { userName: newUsername.newUsername, city: newAddress.newAddress },
-        { headers: { Authorization: `Bearer ${accessToken}` } }
-      )
-      .then((result) => {});
+    if(!insertMode){
+      setPassword('');
+      setopenUserInfo(!openUserInfo);
+    }
+    else{
+      setPassword('');
+      axios({
+        method:'PATCH',
+        url:`${url}/user/info`,
+        data:{userName:newUsername.newUsername,city:newAddress.newAddress},
+        headers:{authorization:`Bearer ${accessToken.accessToken}`}
+      }).then((res)=>{
+        setInsertMode(false);
+        accessTokenRequest();
+      }).catch((err)=>{
+        if(err.response.status===401){
+          alert('유효하지않은 토큰입니다.');
+        }
+        else{
+          alert('server error');
+        }
+      })
+    }
   }
   // 비밀번호 변경 API
   function putPassword() {
-    axios.patch(
-      "url/user/password",
-      { password: changedpassword.changedpassword },
-      { headers: { Authorization: `Bearer ${accessToken}` } }
-    );
+    axios({
+      method:'POST',
+      url:`${url}/user/authCheck`,
+      data:{password:password},
+      headers:{authorization:`Bearer ${accessToken.accessToken}`}
+    }).then((res)=>{
+      if(res.status===200){
+        axios({
+          method:'PATCH',
+          url:`${url}/user/password`,
+          data:{password:changedpassword.changedpassword},
+          headers:{authorization:`Bearer ${accessToken.accessToken}`}
+        }).then((res)=>{
+          alert('비밀번호 변경완료');
+          setopenPassword(false);
+        });
+        setPassword('');
+        setcheckPassword({changedpassword:''});
+        setcheckchangedpassword({checkchangedpassword:''});
+      }
+    }).catch((err)=>{
+      setPassword('');
+      setcheckPassword({changedpassword:''});
+      setcheckchangedpassword({checkchangedpassword:''});
+      if(err.response.status===403){
+        alert('비밀번호 오류');
+      }
+      else if(err.response.status===401){
+        alert('유효하지않은 토큰입니다.');
+      }
+      else{
+        alert('server error');
+      }
+    })
   }
 
   // 회원탈퇴 API
   function deleteUserInfo() {
-    axios.delete("url/del", {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    axios({
+      method:'POST',
+      url:`${url}/user/authCheck`,
+      data:{password:password},
+      headers:{authorization:`Bearer ${accessToken.accessToken}`}
+    }).then((res)=>{
+      if(res.status===200){
+        axios({
+          method:'DELETE',
+          url:`${url}/user`,
+          headers:{authorization:`Bearer ${accessToken.accessToken}`}
+        }).then((res)=>{
+          if(res.status===204){
+            alert('회원탈퇴 완료');
+            history.push('/');
+            setAccessToken({accessToken:''});
+            setLogin(false);
+            setPassword('');
+          }
+        })
+      }
+    }).catch((err)=>{
+      setPassword('');
+      if(err.response.status===403){
+        alert('비밀번호 오류');
+      }
+      else if(err.response.status===401){
+        alert('유효하지 않은 토큰입니다.');
+      }
+      else{
+        alert('server error');
+      }
+    })
     // 삭제 성공시 204 상태코드만 반환하므로 message가 오지 않는다
   }
   return (
@@ -116,19 +232,19 @@ function Mypage({ accessToken, region }) {
           <input
             type="password"
             placeholder="비밀번호를 입력해주세요"
-            value={password.password}
+            value={password}
             onChange={inputPassword}
           ></input>
           <br />
           <br />
-          <button
-            onClick={() => {
-              // 비밀번호가 맞는지 확인
-              // 실패하면 비밀번호가 틀렸다고 띄움
-              // deleteUserInfo()
-              // 회원 탈퇴 완료시 홈화면으로 렌더링
-            }}
-          >
+          <button onClick={()=>{
+            if(password===''){
+              alert('비밀번호를 입력해주세요');
+            }
+            else{
+              deleteUserInfo()
+            }
+          }}>
             확인
           </button>
 
@@ -155,7 +271,7 @@ function Mypage({ accessToken, region }) {
           <input
             type="password"
             placeholder="현재 비밀번호"
-            value={password.password}
+            value={password}
             onChange={inputPassword}
           ></input>
           <br />
@@ -193,8 +309,7 @@ function Mypage({ accessToken, region }) {
               ) {
                 return alert("변경할 비밀번호 다시 확인해주세요");
               }
-              // putPassword()
-              // 비밀번호 변경을 성공하면 비밀번호를 변경했습니다 alert창과 함깨 모달 창이 닫힘(setopenPassword(false))
+              putPassword();
             }}
           >
             확인
@@ -213,7 +328,7 @@ function Mypage({ accessToken, region }) {
       )}
       <div className="MypageText">
         <div id="MypageMBTI">
-          <div style={{ fontSize: "50px" }}>ISFP</div>
+          <div style={{ fontSize: "50px" }}>{userInfo.mbti}</div>
           <div>
             <img
               className="MBTIimg"
@@ -222,27 +337,34 @@ function Mypage({ accessToken, region }) {
           </div>
         </div>
         아이디
-        <input type="text" placeholder="유저의 아이디" disabled></input>
+        <input type="text" value={userInfo.id} disabled></input>
         <br />
         <br />
         닉네임
-        <input
+        {insertMode?<input
           type="text"
-          placeholder="유저의 닉네임(수정 가능)"
           value={newUsername.newUsername}
           maxLength="12"
           onChange={inputnewUsername}
-        ></input>
+        ></input>:
+        <input
+        type="text"
+        value={userInfo.name}
+        maxLength="12"
+        onChange={inputnewUsername}
+        disabled
+      ></input>}
         <br />
         <br />
         <div>
-          지역 변경{" "}
-          <select onChange={inputAddress} className="select">
-            <option>거주하는 지역을 선택하세요</option>
-            {region.map((city) => {
-              return <option>{city}</option>;
-            })}
-          </select>
+          지역 변경
+          {insertMode?
+          <select onChange={inputAddress} className="select" key={userInfo.city} defaultValue={userInfo.city} style={{"marginLeft":"80px"}}>
+            {region.map(city =><option  value={city}>{city}</option>)}
+          </select>:
+          <select onChange={inputAddress} className="select" style={{"marginLeft":"80px"}} key={userInfo.city} defaultValue={userInfo.city} disabled>
+            {region.map(city =><option  value={city}>{city}</option>)}
+          </select>}
         </div>
         <br />
         <br />
@@ -260,31 +382,13 @@ function Mypage({ accessToken, region }) {
               type="password"
               placeholder="비밀번호를 입력해주세요"
               maxLength="50"
-              value={password.password}
+              value={password}
               onChange={inputPassword}
             ></input>
 
             <br />
-            <button
-              onClick={() => {
-                if (newUsername.newUsername === "") {
-                  return alert("닉네임을 입력해주세요");
-                }
-                if (isvalid(newUsername.newUsername) === "blank") {
-                  return alert("닉네임에 공백이 들어갈 수 없습니다");
-                }
-                if (
-                  newAddress.newAddress === "" ||
-                  newAddress.newAddress === "거주하는 지역을 선택하세요"
-                ) {
-                  return alert("지역을 선택해주세요");
-                }
-                // 현재 비밀번호를 확인하고 axios.update
-                // 모달창 닫음(setopenUserInfo(false))
-              }}
-            >
+            <button onClick={authRequest}>
               확인
-              {/* onClick={() => {}} */}
             </button>
           </div>
         ) : (
@@ -293,11 +397,8 @@ function Mypage({ accessToken, region }) {
         <br />
         <div className="MypageButton">
           <button
-            onClick={() => {
-              setopenUserInfo(!openUserInfo);
-            }}
-          >
-            {openUserInfo ? "회원정보 수정 취소" : "회원정보 수정"}
+            onClick={putUserInfo}>
+            {insertMode ? "회원정보 수정 저장" : "회원정보 수정"}
             {/* 회원정보 수정 */}
           </button>
           <button
