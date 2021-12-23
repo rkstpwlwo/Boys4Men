@@ -10,6 +10,7 @@ export default function MBTISurveyResult({ accessToken, userMbti }) {
     장르1: [{ name: "곡이름", artist: "가수이름" }],
     장르2: [{ name: "곡이름", artist: "가수이름" }],
   };
+  userMbti="";
 
   // mbti유형이 정해진 후의 페이지에 필요한 데이터(mbti가 선호하는 장르와 해당장르에 속하는 곡들)을 요청하는 API
   function getSongs() {
@@ -21,7 +22,7 @@ export default function MBTISurveyResult({ accessToken, userMbti }) {
   }
 
   return (
-    <div id="MBTISurveyResult">
+    <div className='outer-container'>
       <div id="top">
         <div id="imageTag">
           {/* mbti 이미지 */}

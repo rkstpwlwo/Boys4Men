@@ -1,17 +1,46 @@
 import "./GenrePage.css";
-import { useState } from "react";
-import Axios from "axios";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-// const request=()=>{
-//     Axios({
-//       method:'get',
-//       url:'http://localhost:44165/',
-//       data:{data:data}
-//     }).then((res)=>{
-//       console.log(res.data);
-//       setServerData(res.data);
-//     })
-//   }
+
+export function GenreDetail({genre,url}){
+  const [genreName,setGenreName]=useState(genre);
+  const [genreImg,setgenreImg]=useState('');
+  const [description,setDescription]=useState('');
+  const [song,setSong]=useState([]);
+
+  useEffect(()=>{
+    axios({
+      method:'GET',
+      url:`${url}/genre/${genre}`,
+    }).then((res)=>{
+      setgenreImg(res.data.image);
+      setDescription(res.data.description);
+      setSong(res.data.song);
+    })
+  },[])
+  
+  return(
+    <div className="detail-container">
+      <div className="detail-upper1">
+        <img src={genreImg}/>
+      </div>
+      <div className="detail-upper2">
+        <span style={{"font-size":"40px"}}>{genreName}</span>
+        <pre>
+          {description}
+        </pre>
+      </div>
+      <div className="detail-footer">
+        <span>장르 인기음악</span>
+        <ul>
+          {song.map(el=>(<li>{`${el.name}  -  ${el.artist}`}</li>))}
+        </ul>
+      </div>
+    </div>
+  )
+}
+
 export function PunkComponent() {
   return (
     <div id="PunkComponent">

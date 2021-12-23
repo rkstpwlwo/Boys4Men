@@ -36,10 +36,12 @@ function Nav({ isLogin, LogoutHandler }) {
         </Link>
 
         {isLogin ? (
+          <Link style={{ textDecoration: "none" }}>
           <div className="nav_element" onClick={()=>{
             LogoutHandler();
             history.push('/');
-          }}>로그아웃</div> // onClick={() => LogoutHandler 실행}
+          }}>로그아웃</div>
+          </Link> // onClick={() => LogoutHandler 실행}
         ) : (
           <Link to="/Login" style={{ textDecoration: "none" }}>
             <div className="nav_element">

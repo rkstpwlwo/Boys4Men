@@ -74,3 +74,54 @@ Genre a {
   text-decoration-line: none;
   width: 100%;
 }
+
+.detail-container{
+  display:grid;
+  width:100vw;
+  height:calc(100vh - 98px);
+  grid-template-columns: repeat(6,1fr);
+  grid-template-rows: repeat(6,1fr);
+  align-items: center;
+}
+
+.detail-upper1{
+  grid-column-start:2;
+  grid-column-end:3;
+  grid-row-start:2;
+  grid-row-end:4;
+  text-align:center;
+}
+
+.detail-upper1>img{
+  width:250px;
+  height:250px;
+}
+
+.detail-upper2{
+  grid-column-start:3;
+  grid-column-end:6;
+  grid-row-start:2;
+  grid-row-end:4;
+  padding:10px;
+}
+
+.detail-upper2>pre{
+  white-space:pre-wrap;
+  font-size:20px;
+}
+
+.detail-footer{
+  grid-column-start:2;
+  grid-column-end:6;
+  grid-row-start:4;
+  grid-row-end:6;
+  padding-left:20px;
+}
+
+.detail-footer>span{
+  font-size:30px;
+}
+
+.detail-footer>ul{
+  font-size:20px;
+}

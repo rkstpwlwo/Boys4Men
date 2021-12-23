@@ -24,16 +24,6 @@ import SurveyLink from "../MBTIsearch/SurveyLink";
 //메뉴는 main tag가져와서 삭제
 // import {mypage,board,login, MyPage} from '../Nav/nav'
 export default function MbtiRouter() {
-  //  axios.get('./http://localhost:3004/genre/istp',)
-  //  let ISTJ =document.getElementById('ISTJ')
-  //  document.removeChild(ISTJ)
-  // // onClick={ document.removeChild(ISTJ)}
-  // if(window.location("http://localhost:3008/mbti/istj")){
-  //   return <div>내목소리 들리니?</div>
-  // }
-  // axios.post("http://localhost:3008/mbti/istj").then()
-  //onClick={()=>window.location.reload("http://localhost:3008/mbti/istj")}
-  let port = window.location.port;
   return (
     <div>
       <main id="main">

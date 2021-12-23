@@ -35,7 +35,7 @@ module.exports = {
       endConnection(connection);
     },
     patchInfo:(userInfo,newInfo,callback)=>{
-      const queryString='update user set name=?,city=? where userId=?';
+      const queryString='update User set name=?,city=? where userId=?';
       const connection=createConnection();
       connection.query(queryString,[newInfo.name,newInfo.city,userInfo.id],function(err,result){
         callback(err,result);
@@ -43,7 +43,7 @@ module.exports = {
       endConnection(connection);
     },
     deleteUser:(userInfo,callback)=>{
-      const queryString='delete from user where userId=?';
+      const queryString='delete from User where userId=?';
       const connection=createConnection();
       connection.query(queryString,[userInfo.id],function(err,result){
         callback(err,result);
@@ -51,7 +51,7 @@ module.exports = {
       endConnection(connection);
     },
     patchPassword:(userInfo,newPassword,callback)=>{
-      const queryString='update user set password=? where userId=?';
+      const queryString='update User set password=? where userId=?';
       const connection=createConnection();
       connection.query(queryString,[newPassword,userInfo.id],function(err,result){
         callback(err,result);
@@ -59,7 +59,7 @@ module.exports = {
       endConnection(connection);
     },
     saveMbti:(userInfo,mbti,callback)=>{
-      const queryString='update user set mbti=? where userId=?';
+      const queryString='update User set mbti=? where userId=?';
       const connection=createConnection();
       connection.query(queryString,[mbti,userInfo.id],function(err,result){
         callback(err,result);
@@ -122,7 +122,7 @@ module.exports = {
   },
   genre:{
     get:(callback)=>{
-      const queryString='select name,img from genre';
+      const queryString='select name,img from Genre';
       const connection=createConnection();
       connection.query(queryString,function(err,result){
         callback(err,result);
@@ -130,8 +130,8 @@ module.exports = {
       endConnection(connection);
     },
     getGenre:(genreName,callback)=>{
-      const queryString=`select song.artist,song.name,genre.img,genre.description from song,genre 
-                          where genre.id=song.genreId and genre.name=?`;
+      const queryString=`select Song.artist,Song.name,Genre.img,Genre.description from Song,Genre 
+                          where Genre.id=Song.genreId and Genre.name=?`;
       const connection=createConnection();
       connection.query(queryString,[genreName],function(err,result){
         callback(err,result);
@@ -139,9 +139,9 @@ module.exports = {
       endConnection(connection);
     },
     getMbti:(mbti,callback)=>{
-      const queryString=`select song.name,song.artist,genre.name as genreName from song,genre 
-                        where song.genreId=genre.id
-                        and song.genreId in (select genreId from genre_mbti where mbti=?)`
+      const queryString=`select Song.name,Song.artist,Genre.name as genreName from Song,Genre 
+                        where Song.genreId=Genre.id
+                        and Song.genreId in (select genreId from Genre_Mbti where mbti=?)`
       const connection=createConnection();
       connection.query(queryString,[mbti],function(err,result){
         callback(err,result);

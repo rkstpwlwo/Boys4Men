@@ -33,23 +33,11 @@ import {
   ENFPComponent,
 } from "./Pages/MbtiPage/Mbtiexplain";
 import Genre from "./Pages/GenrePage/GenrePage";
-import {
-  PunkComponent,
-  JazzComponent,
-  AlternativeRockComponent,
-  NewAgeComponent,
-  PopComponent,
-  MetalComponent,
-  HiphopComponent,
-  ElectronicaComponent,
-  BluesComponent,
-  RandBComponent,
-  ReggaeComponent,
-} from "./Pages/GenrePage/GenreExplain";
+import {GenreDetail,} from "./Pages/GenrePage/GenreExplain";
 
 function App() {
   const [isLogin, setLogin] = useState(false);
-
+  const [genre,setGenre]=useState('');
   const [userMbti, setuserMbti] = useState(null); //mbti
 
   // const [userInfo, setuserInfo] = useState(null);
@@ -132,7 +120,7 @@ function App() {
             <div>
               <Route exact path="/">
                 <MbtiPage />
-                <Genre />
+                <Genre setGenre={setGenre}/>
               </Route>
               <Route path="/board">
                 <Board accessToken={accessToken} isLogin={isLogin} />
@@ -217,38 +205,8 @@ function App() {
                 <ENFPComponent />
               </Route>
 
-              <Route exact path="/genre/Punk">
-                <PunkComponent />
-              </Route>
-              <Route path="/genre/Jazz">
-                <JazzComponent />
-              </Route>
-              <Route path="/genre/AlternativeRock">
-                <AlternativeRockComponent />
-              </Route>
-              <Route path="/genre/NewAge">
-                <NewAgeComponent />
-              </Route>
-              <Route path="/genre/Pop">
-                <PopComponent />
-              </Route>
-              <Route path="/genre/Metal">
-                <MetalComponent />
-              </Route>
-              <Route path="/genre/Hiphop">
-                <HiphopComponent />
-              </Route>
-              <Route path="/genre/Electronica">
-                <ElectronicaComponent />
-              </Route>
-              <Route path="/genre/Blues">
-                <BluesComponent />
-              </Route>
-              <Route path="/genre/RandB">
-                <RandBComponent />
-              </Route>
-              <Route path="/genre/Reggae">
-                <ReggaeComponent />
+              <Route exact path="/genre/detail">
+                <GenreDetail url={url} genre={genre}/>
               </Route>
             </div>
           </Switch>
